@@ -225,7 +225,9 @@ const Index = () => {
               ) : (
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: description?.text || "<div>Summary</div>",
+                    __html:
+                      "<style>img {  max-width: 100%;  height: auto;  display: block;  margin: 0 auto;}</style>" +
+                        (description?.text || "<div>Summary</div>"),
                   }}
                 />
               )}
@@ -236,7 +238,7 @@ const Index = () => {
               ) : (
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: summary?.data || "<div>Summary</div>",
+                    __html:'<style>img {  max-width: 100%;  height: auto;  display: block;  margin: 0 auto;}</style>' + (summary?.data || "<div>Summary</div>"),
                   }}
                 />
               )}
