@@ -56,7 +56,7 @@ const Index = () => {
       setShowroomId(router.query.showRoomId);
       getVehicleData();
       setBrochureUrl(
-        `${process.env.NEXT_PUBLIC_VIEW_MOTOTRACKS_URL}brochure/vehicle/${router.query.id}?showRoomId=${showroomData._id}`
+        `${process.env.NEXT_PUBLIC_VIEW_MOTOTRACKS_URL}brochure/vehicle/${router.query.id}?showRoomId=${router.query.showRoomId}`
       );
     }
   }, [router?.query]);
