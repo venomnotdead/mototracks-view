@@ -237,7 +237,7 @@ const Index = () => {
                 <Skeleton variant="text" />
               ) : (
                 offers.data.length &&
-                offers.data.map((row, i) => {
+                offers.data.filter((_) => _ != "").map((row, i) => {
                   return (
                     <div
                       key={i}
@@ -260,7 +260,7 @@ const Index = () => {
                 <Skeleton variant="text" />
               ) : (
                 pricingStructure.data.length &&
-                pricingStructure.data.map((row, i) => {
+                pricingStructure.data.filter((_) => _ != "").map((row, i) => {
                   return (
                     <div
                       key={i}
