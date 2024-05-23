@@ -95,7 +95,6 @@ const Index = () => {
           text: `Check out this brochure for ${vehicleInfo.name}!`,
           url: brochureUrl,
         })
-        .then(() => console.log("Successfully shared"))
         .catch((error) => {
           navigator.clipboard.writeText(brochureUrl);
           dispatch(
@@ -153,7 +152,7 @@ const Index = () => {
   useEffect(() => {
     if (showroomId) {
       getShowroomData(showroomId);
-      getVehicleList();
+      // getVehicleList();
     }
   }, [showroomId]);
 

@@ -4,14 +4,14 @@ import {
   Card,
   CardContent,
   CardHeader,
-  Dialog,
+  Autocomplete,
   DialogActions,
   DialogContent,
   Divider,
   Grid,
   TextField,
 } from "@mui/material";
-import { addDoc } from "@/pages/api";
+import { addDoc, getDocs } from "@/pages/api";
 import { snackBarEvent } from "@/redux/actions";
 import { useRouter } from "next/router";
 import { collection } from "@/config/collectionName";
@@ -21,12 +21,30 @@ const Enquiry = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const enquiryRef = collection.enquiryRef;
-  const [submitted, setSubmitted] = useState(false);
-  const [newEnquiryData, setNewEnquiryData] = useState<any>({});
+  const vehiclesRef = collection.vehicleRef;
   const [submit, setSubmit] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [vehiclesList, setVehiclesList] = useState([]);
+  const [vehicleLoading, setVehicleLoading] = useState(true);
+  const [newEnquiryData, setNewEnquiryData] = useState<any>({});
   const handleChange = (e: any) => {
     setNewEnquiryData({ ...newEnquiryData, [e.target.name]: e.target.value });
   };
+
+  const getVehicleList = async () => {
+    let data = await getDocs(vehiclesRef, {
+      showRoomId: router?.query?.showRoomId,
+    });
+    setVehiclesList(data);
+    setVehicleLoading(false);
+  };
+
+  useEffect(() => {
+    if (router.query.showRoomId) {
+      getVehicleList();
+    }
+  }, [router.query.showRoomId]);
+
   const handleSubmit = async () => {
     setSubmit(true);
     if (
@@ -59,6 +77,7 @@ const Enquiry = () => {
       );
     }
   };
+
   return (
     <div>
       <Card>
@@ -114,15 +133,28 @@ const Enquiry = () => {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <TextField
+                <Autocomplete
+                  disablePortal
+                  id="combo-box-demo"
+                  options={vehiclesList || []}
+                  sx={{ width: "100%" }}
                   fullWidth
-                  label="Interested vehicle"
-                  type="vehicle"
-                  placeholder="bike..."
-                  error={submit && !newEnquiryData.vehicle}
-                  value={newEnquiryData.vehicle}
-                  onChange={handleChange}
-                  name="vehicle"
+                  // multiple
+                  onChange={(e, v: any) => {
+                    setNewEnquiryData({
+                      ...newEnquiryData,
+                      vehicle: v?.name || "",
+                    });
+                  }}
+                  getOptionKey={(e: any) => e._id}
+                  getOptionLabel={(e: any) => e.name}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      error={submit && !newEnquiryData.vehicle}
+                      label="Interested vehicle"
+                    />
+                  )}
                 />
               </Grid>
               <Grid item xs={12} sm={12}>
