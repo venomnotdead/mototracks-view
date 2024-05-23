@@ -236,11 +236,12 @@ const Index = () => {
               {vehicleLoading ? (
                 <Skeleton variant="text" />
               ) : (
-                offers.data.length &&
-                offers.data.filter((_) => _ != "").map((row, i) => {
+                offers?.data?.length &&
+                offers.data.filter((_) => _.some((a) => a)).map((row, i) => {
                   return (
                     <div
                       key={i}
+                      className={`tableRow ${i == 0 ? `tableHeader` : ''}`}
                       style={{
                         display: "flex",
                         justifyContent: "space-evenly",
@@ -255,15 +256,17 @@ const Index = () => {
                 }).filter(Boolean)
               )}
             </CardContent>
-            <CardContent>
+            <Divider sx={{mt:2}}/>
+            <CardContent sx={{mt:2}}>
               {vehicleLoading ? (
                 <Skeleton variant="text" />
               ) : (
-                pricingStructure.data.length &&
-                pricingStructure.data.filter((_) => _ != "").map((row, i) => {
+                pricingStructure?.data?.length &&
+                pricingStructure.data.filter((_) => _.some((a) => a)).map((row, i) => {
                   return (
                     <div
                       key={i}
+                      className={`tableRow ${i == 0 ? `tableHeader` : ''}`}
                       style={{
                         display: "flex",
                         justifyContent: "space-evenly",

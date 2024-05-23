@@ -40,6 +40,8 @@ const theme = createTheme({
                     boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)', // Add box shadow to cards
                     borderRadius: '16px',
                     lineHeight: 1.333,
+                    color:'#333333',
+                    fontFamily: 'system-ui',
                 },
             },
         },
