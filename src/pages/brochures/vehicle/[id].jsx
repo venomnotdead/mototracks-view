@@ -252,7 +252,7 @@ const Index = () => {
                       })}
                     </div>
                   );
-                })
+                }).filter(Boolean)
               )}
             </CardContent>
             <CardContent>
@@ -275,7 +275,7 @@ const Index = () => {
                       })}
                     </div>
                   );
-                })
+                }).filter(Boolean)
               )}
             </CardContent>
             <CardContent>
