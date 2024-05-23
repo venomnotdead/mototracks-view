@@ -227,7 +227,7 @@ const Index = () => {
                   dangerouslySetInnerHTML={{
                     __html:
                       "<style>img {  max-width: 100%;  height: auto;  display: block;  margin: 0 auto;}</style>" +
-                        (description?.text || "<div>Summary</div>"),
+                      (description?.text || "<div>Summary</div>"),
                   }}
                 />
               )}
@@ -236,9 +236,57 @@ const Index = () => {
               {vehicleLoading ? (
                 <Skeleton variant="text" />
               ) : (
+                offers.data.length &&
+                offers.data.map((row, i) => {
+                  return (
+                    <div
+                      key={i}
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-evenly",
+                        width: "100%",
+                      }}
+                    >
+                      {row.map((col, index) => {
+                        return <div key={index}>{col}</div>;
+                      })}
+                    </div>
+                  );
+                })
+              )}
+            </CardContent>
+            <CardContent>
+              {vehicleLoading ? (
+                <Skeleton variant="text" />
+              ) : (
+                pricingStructure.data.length &&
+                pricingStructure.data.map((row, i) => {
+                  return (
+                    <div
+                      key={i}
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-evenly",
+                        width: "100%",
+                      }}
+                    >
+                      {row.map((col, index) => {
+                        return <div key={index}>{col}</div>;
+                      })}
+                    </div>
+                  );
+                })
+              )}
+            </CardContent>
+            <CardContent>
+              {vehicleLoading ? (
+                <Skeleton variant="text" />
+              ) : (
                 <div
                   dangerouslySetInnerHTML={{
-                    __html:'<style>img {  max-width: 100%;  height: auto;  display: block;  margin: 0 auto;}</style>' + (summary?.data || "<div>Summary</div>"),
+                    __html:
+                      "<style>img {  max-width: 100%;  height: auto;  display: block;  margin: 0 auto;}</style>" +
+                      (summary?.data || "<div>Summary</div>"),
                   }}
                 />
               )}
