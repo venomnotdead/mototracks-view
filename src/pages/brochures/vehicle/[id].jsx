@@ -236,48 +236,68 @@ const Index = () => {
                 <Skeleton variant="text" />
               ) : (
                 offers?.data?.length &&
-                offers.data.filter((_) => _.some((a) => a)).map((row, i) => {
-                  return (
-                    <div
-                      key={i}
-                      className={`tableRow ${i == 0 ? `tableHeader` : ''}`}
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-evenly",
-                        width: "100%",
-                      }}
-                    >
-                      {row.map((col, index) => {
-                        return <div key={index}>{col}</div>;
-                      })}
-                    </div>
-                  );
-                }).filter(Boolean)
+                offers.data
+                  .filter((_) => _.some((a) => a))
+                  .map((row, i) => {
+                    return (
+                      <div
+                        key={i}
+                        className={`tableRow ${i == 0 ? `tableHeader` : ""}`}
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-evenly",
+                          width: "100%",
+                        }}
+                      >
+                        {row.map((col, index) => {
+                          return (
+                            <div
+                              style={{ width: `${100 / row.length + 1}%` }}
+                              key={index}
+                            >
+                              {col}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    );
+                  })
+                  .filter(Boolean)
               )}
             </CardContent>
-            <Divider sx={{mt:2}}/>
-            <CardContent sx={{mt:2}}>
+            <Divider sx={{ mt: 2 }} />
+            <CardContent sx={{ mt: 2 }}>
               {vehicleLoading ? (
                 <Skeleton variant="text" />
               ) : (
                 pricingStructure?.data?.length &&
-                pricingStructure.data.filter((_) => _.some((a) => a)).map((row, i) => {
-                  return (
-                    <div
-                      key={i}
-                      className={`tableRow ${i == 0 ? `tableHeader` : ''}`}
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-evenly",
-                        width: "100%",
-                      }}
-                    >
-                      {row.map((col, index) => {
-                        return <div key={index}>{col}</div>;
-                      })}
-                    </div>
-                  );
-                }).filter(Boolean)
+                pricingStructure.data
+                  .filter((_) => _.some((a) => a))
+                  .map((row, i) => {
+                    return (
+                      <div
+                        key={i}
+                        className={`tableRow ${i == 0 ? `tableHeader` : ""}`}
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-evenly",
+                          width: "100%",
+                        }}
+                      >
+                        {row.map((col, index) => {
+                          return (
+                            <div
+                              style={{ width: `${100 / row.length + 1}%` }}
+                              key={index}
+                            >
+                              {col}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    );
+                  })
+                  .filter(Boolean)
               )}
             </CardContent>
             <CardContent>

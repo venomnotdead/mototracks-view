@@ -7,7 +7,6 @@ export default async function handler(req, res) {
         try {
             const database = client.db();
             const collection = database.collection(collectionName);
-            console.log(data, collectionName, 'the query')
             if (data) {
                 const result = await collection.find(data).toArray();
                 res.status(200).json(result)
