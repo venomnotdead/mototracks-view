@@ -249,16 +249,22 @@ const Index = () => {
                           width: "100%",
                         }}
                       >
-                        {row.map((col, index) => {
-                          return (
-                            <div
-                              style={{ width: `${100 / row.length + 1}%` }}
-                              key={index}
-                            >
-                              {col}
-                            </div>
-                          );
-                        })}
+                        {row
+                          .filter((_) => _ != "")
+                          .map((col, index) => {
+                            return (
+                              <div
+                                style={{
+                                  width: `${
+                                    100 / row.filter((_) => _ != "").length + 1
+                                  }%`,
+                                }}
+                                key={index}
+                              >
+                                {col}
+                              </div>
+                            );
+                          })}
                       </div>
                     );
                   })
