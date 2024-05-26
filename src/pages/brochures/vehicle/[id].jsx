@@ -88,9 +88,9 @@ const Index = () => {
   };
 
   const shareContent = () => {
-    if (navigator.share) {
+    if (navigator?.share) {
       navigator
-        .share({
+        ?.share({
           title: vehicleInfo.name,
           text: `Check out this brochure for ${vehicleInfo.name}!`,
           url: brochureUrl,
