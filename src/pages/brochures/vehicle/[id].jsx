@@ -91,8 +91,8 @@ const Index = () => {
     if (navigator?.share) {
       navigator
         ?.share({
-          title: vehicleInfo.name,
-          text: `Check out this brochure for ${vehicleInfo.name}!`,
+          title: vehicleData.name,
+          text: `Check out this brochure for ${vehicleData.name}!`,
           url: brochureUrl,
         })
         .catch((error) => {
