@@ -9,6 +9,7 @@ body {
   font-family: system-ui;
   line-height: 1.333;
   background: #e8eaf6;
+  caret-color: #3f51b5;
   color: rgb(102, 112, 133) !important;
 }
 .tableHeader{
