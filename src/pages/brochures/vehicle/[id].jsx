@@ -217,8 +217,14 @@ const Index = () => {
                 <Skeleton variant="text" />
               ) : (
                 formattedString(vehicleData?.price)
-              )}{" "}
-              Available in {vehicleData?.fuelType?.join(", ")}
+              )}
+              {vehicleLoading ? (
+                <Skeleton variant="text" />
+              ) : (
+                `
+                Available in ${vehicleData?.fuelType?.join(", ")}
+                `
+              )}
               {vehicleLoading ? (
                 <Skeleton variant="text" />
               ) : (
