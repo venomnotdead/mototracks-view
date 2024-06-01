@@ -5,19 +5,24 @@ const API_BASE_URL = '/api';
 
 export async function getDoc(collectionName, id) {
     try {
-        const response = await axios.get(`${API_BASE_URL}/getDoc`, {
-            params: {
-                collectionName,
-                id
-            }
-        });
-        return response.data;
+        const response = await fetch(`/api/getDoc?collectionName=${collectionName}&id=${id}`);
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let result = '';
+        let done = false;
+
+        while (!done) {
+            const { value, done: doneReading } = await reader.read();
+            done = doneReading;
+            result += decoder.decode(value, { stream: true });
+        }
+
+        return JSON.parse(result);
     } catch (error) {
-        console.error('Error fetching products:', error);
+        console.error('Error fetching document:', error);
         throw error;
     }
 }
-
 export async function getDocs(collectionName, data) {
     try {
         const response = await axios.post(`${API_BASE_URL}/getDocs`, {

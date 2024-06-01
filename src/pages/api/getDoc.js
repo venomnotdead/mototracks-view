@@ -7,12 +7,32 @@ export default async function handler(req, res) {
         try {
             const database = client.db();
             const collection = database.collection(collectionName);
-            const newId = new ObjectId(id)
+            const newId = new ObjectId(id);
             const result = await collection.findOne({ _id: newId });
-            res.status(200).json(result)
+
+            if (result) {
+                // Stream the JSON response
+                res.writeHead(200, {
+                    'Content-Type': 'application/json',
+                    'Transfer-Encoding': 'chunked'
+                });
+
+                // Convert the result to a JSON string and split into chunks
+                const resultString = JSON.stringify(result);
+                const chunkSize = 1024; // Adjust chunk size as needed
+
+                for (let i = 0; i < resultString.length; i += chunkSize) {
+                    const chunk = resultString.slice(i, i + chunkSize);
+                    res.write(chunk);
+                }
+
+                res.end();
+            } else {
+                res.status(404).json({ error: 'Document not found' });
+            }
         } catch (err) {
             console.error('Error getting document:', err);
-            throw err;
+            res.status(500).json({ error: 'Error getting document' });
         }
     } else {
         res.status(405).json({ error: 'Method Not Allowed' });
